@@ -4,9 +4,13 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
+var passport = require('passport')
 
+
+var authenticationRouter = require('./routes/authentication')
 var usersRouter = require('./routes/users');
 var asyncUsersRouter = require('./routes/async-users')
+var authenticate = require('./authenticate')
 
 var app = express();
 
@@ -17,11 +21,14 @@ app.set('view engine', 'jade');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(passport.initialize())
+// app.use(passport.session())
 
 mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true })
 
+app.use('/auth', authenticationRouter)
 app.use('/users', usersRouter);
 app.use('/async-users', asyncUsersRouter);
 
