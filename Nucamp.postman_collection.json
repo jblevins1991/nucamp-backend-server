@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "b3a235d3-2597-4481-aabb-c0566d8be0b8",
+		"name": "Nucamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Find Jobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/jobs",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/jobs/60b18cea31b4f2802c1ee001",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"jobs",
+						"60b18cea31b4f2802c1ee001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Job",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGIxODg3MTIyMTYzYjdmYTgxZjc5OTYiLCJpYXQiOjE2MjIyNDk1NTksImV4cCI6MTYyMjI4NTU1OX0.Ju4g92d-ywrHjciBYfVFjru6zRiW2fqhIieJTPOt6wo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Dog Walker\",\r\n    \"pay\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/jobs",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find By ID and Update Job",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Dog Walker\",\r\n    \"pay\": 500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/jobs/60b02f38a2421594386f5539",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"jobs",
+						"60b02f38a2421594386f5539"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find By ID and Delete Job",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/jobs",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jblevins1\",\r\n    \"password\": \"August8th\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/sign-up",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jblevins1\",\r\n    \"password\": \"August8th\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
