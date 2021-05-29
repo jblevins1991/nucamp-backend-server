@@ -6,8 +6,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 var passport = require('passport')
 
-
 var authenticationRouter = require('./routes/authentication')
+var jobsRouter = require('./routes/jobs')
 var authenticate = require('./authenticate');
 
 var app = express();
@@ -28,6 +28,8 @@ app.use(passport.initialize())
 mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true })
 
 app.use('/auth', authenticationRouter)
+
+app.use('/jobs', jobsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

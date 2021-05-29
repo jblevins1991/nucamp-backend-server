@@ -31,7 +31,7 @@ exports.jwtPassport = passport.use(
             }, (error, userFound) => {
                 if (error) {
                     return done(error)
-                } else if (user) {
+                } else if (userFound) {
                     return done(null, userFound)
                 } else {
                     return done(null, false)
