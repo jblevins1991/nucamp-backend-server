@@ -1,5 +1,8 @@
 const express = require('express')
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
+const userModel = require('../models/user')
 const jobModel = require('../models/job')
 const authenticate = require('../authenticate')
 
@@ -26,9 +29,19 @@ router.route('/')
         return next(error)
       }
 
-      res.send({
-        result: jobCreated,
-      })
+      userModel.findByIdAndUpdate(
+        req.user._id, {
+          job: new ObjectId(jobCreated._id)
+        },
+        (error, _) => {
+          if (error) {
+            return next(error)
+          }
+
+          res.send({
+            result: jobCreated,
+          })
+        })
     })
   })
 

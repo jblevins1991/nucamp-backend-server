@@ -5,6 +5,7 @@ var path = require('path');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var passport = require('passport')
+var cors = require('cors')
 
 var authenticate = require('./authenticate')
 var oauth = require('./oauth')
@@ -20,13 +21,15 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(express.json());
-// app.use(cookieParser())
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(passport.initialize())
-// app.use(passport.session())
+app.use(cors())
 
+// initialize passport middleware
+app.use(passport.initialize())
+
+// initialize the mongodb connection
 mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true })
 
 app.all('*', (req, res, next) => {
@@ -38,14 +41,25 @@ app.all('*', (req, res, next) => {
 })
 
 app.use('/auth', authenticationRouter)
+// register the authRouter to be accessible at the `/auth` path.
+app.use('/auth', authenticationRouter)
+
+// register the jobsRouter to be accessible at the `/jobs` path.
 app.use('/jobs', jobsRouter)
 
-// catch 404 and forward to error handler
+/**
+ * This is a catch-all route handler.
+ * 
+ * If a request does not match a route on a router, it will be caught here and 
+ * a 404 will be sent back to the client.
+ */
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+/**
+ * This catches errors and sends them back as responses.
+ */
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;

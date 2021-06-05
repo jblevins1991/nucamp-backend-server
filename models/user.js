@@ -6,6 +6,10 @@ const userSchema = mongoose.Schema({
   isAdmin: {
     type: Boolean,
     default: false,
+  },
+  job: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'jobs'
   }
 })
 

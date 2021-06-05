@@ -1,7 +1,7 @@
 var express = require('express');
 const passport = require('passport')
-const getToken = require('../authenticate').getToken
-
+const createToken = require('../authenticate').createToken
+const cors = require('cors')
 var router = express.Router();
 
 const userModel = require('../models/user')
@@ -32,7 +32,7 @@ router.route('/sign-up')
 
 router.route('/login')
     .post(passport.authenticate('local'), (req, res) => {
-        const token = getToken({
+        const token = createToken({
             _id: req.user._id,
         })
 
