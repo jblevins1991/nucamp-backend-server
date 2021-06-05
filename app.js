@@ -6,9 +6,11 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 var passport = require('passport')
 
+var authenticate = require('./authenticate')
+var oauth = require('./oauth')
+
 var authenticationRouter = require('./routes/authentication')
 var jobsRouter = require('./routes/jobs')
-var authenticate = require('./authenticate');
 
 var app = express();
 
@@ -27,8 +29,15 @@ app.use(passport.initialize())
 
 mongoose.connect('mongodb://localhost:27017/local', { useNewUrlParser: true })
 
-app.use('/auth', authenticationRouter)
+app.all('*', (req, res, next) => {
+  if (req.secure) {
+    return next()
+  } else {
+    res.redirect(301, `https://${req.hostname}:${app.get('secPort')}${req.url}`)
+  }
+})
 
+app.use('/auth', authenticationRouter)
 app.use('/jobs', jobsRouter)
 
 // catch 404 and forward to error handler
